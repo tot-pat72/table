@@ -1,22 +1,30 @@
-const array = [
+let array = [
     {
         firstname1: 'Géza',
         firstname2: 'Ferenc',
-        lastname: 'Kocsis'
+        lastname: 'Kocsis',
+        married: true,
+        pet: 'kutya'
     },
     {
         firstname1: 'Mária',
         firstname2: 'Júlia',
-        lastname: 'Horváth'
+        lastname: 'Horváth',
+        married: false,
+        pet: 'macska'
     },
     {
         firstname1: 'Ferenc',
-        lastname: 'Balogh'
+        lastname: 'Balogh',
+        married: false,
+        pet: 'teknős'
     },
     {
         firstname1: 'Gábor',
         firstname2: 'Attila',
-        lastname: 'Horváth'
+        lastname: 'Horváth',
+        married: true,
+        pet: 'macska'
     },
 ]
 const table = document.createElement('table');
@@ -40,6 +48,14 @@ th_firstname.innerHTML = 'keresztnev';
 
 th_lastname.colSpan=2;
 
+const th_married = document.createElement('th')
+tr.appendChild(th_married)
+th_married.innerHTML = 'házastárs';
+
+const th_pet = document.createElement('th')
+tr.appendChild(th_pet)
+th_pet.innerHTML = 'háziállat';
+
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
 
@@ -57,6 +73,14 @@ for(const pers of array){
     
     tbody_td_firstname.innerHTML = pers.firstname1;
 
+    const td_married = document.createElement('td');
+    tbody_tr.appendChild(td_married);
+    td_married.innerHTML = pers.married;
+
+    const td_pet = document.createElement('td');
+    tbody_tr.appendChild(td_pet);
+    td_pet.innerHTML = pers.pet;
+
     if(pers.firstname2 === undefined){
         tbody_td_firstname.colSpan = 2
     }
@@ -67,5 +91,21 @@ for(const pers of array){
     tbody_td_firstname.innerHTML = pers.firstname2;
     }
 
+    tbody_tr.addEventListener('click',function(e){
+        
+        const selected = tbody.querySelector('.selected');
+        if(selected != undefined){
+            selected.classList.remove('selected');
+        }
+    e.currentTarget.classList.add('selected');
+
+    })
+
+    if(pers.married === true){
+        td_married.innerHTML = 'igen'
+    }
+    else{
+        td_married.innerHTML = 'nem'
+    }
 }
 

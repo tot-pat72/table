@@ -17,6 +17,10 @@ table tbody tr:nth-child(odd){
     background-color: violet;
 }
 
-table tr:not(:first-child):hover{
+table tbody tr:hover{
     background-color: blanchedalmond;
+}
+
+.selected {
+    transform: scale(1.2);
 }
