@@ -73,13 +73,13 @@ for(const pers of array){
     
     tbody_td_firstname.innerHTML = pers.firstname1;
 
-    const td_married = document.createElement('td');
-    tbody_tr.appendChild(td_married);
-    td_married.innerHTML = pers.married;
+    const tbody_td_married = document.createElement('td');
+    tbody_tr.appendChild(tbody_td_married);
+    tbody_td_married.innerHTML = pers.married;
 
-    const td_pet = document.createElement('td');
-    tbody_tr.appendChild(td_pet);
-    td_pet.innerHTML = pers.pet;
+    const tbody_td_pet = document.createElement('td');
+    tbody_tr.appendChild(tbody_td_pet);
+    tbody_td_pet.innerHTML = pers.pet;
 
     if(pers.firstname2 === undefined){
         tbody_td_firstname.colSpan = 2
@@ -102,10 +102,24 @@ for(const pers of array){
     })
 
     if(pers.married === true){
-        td_married.innerHTML = 'igen'
+        tbody_td_married.innerHTML = 'igen'
     }
     else{
-        td_married.innerHTML = 'nem'
+        tbody_td_married.innerHTML = 'nem'
     }
 }
 
+const form = document.getElementById('form');
+form.addEventListener('submit', function(e){
+    const lastname = document.getElementById('lastname');
+    const firstname1 = document.getElementById('firstname1');
+    const firstname2 = document.getElementById('firstname2');
+    const married = document.getElementById('married');
+    const pet = document.getElementById('pet');
+
+    const lastnameValue = lastname.value;
+    const firstname1Value = firstname1.value;
+    const firstname2Value = firstname2.value;
+    const marriedValue = married.checked;
+    const petValue = pet.value;
+})
