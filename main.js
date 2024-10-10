@@ -41,10 +41,15 @@ tr.appendChild(th_lastname);
 
 th_lastname.innerHTML = 'vezeteknev';
 
-const th_firstname = document.createElement('th');
-tr.appendChild(th_firstname);
+const th_firstname1 = document.createElement('th');
+tr.appendChild(th_firstname1);
 
-th_firstname.innerHTML = 'keresztnev';
+th_firstname1.innerHTML = '1.keresztnev';
+
+const th_firstname2 = document.createElement('th');
+tr.appendChild(th_firstname2);
+
+th_firstname2.innerHTML = '2.keresztnev';
 
 th_lastname.colSpan=2;
 
@@ -73,6 +78,16 @@ for(const pers of array){
     
     tbody_td_firstname.innerHTML = pers.firstname1;
 
+    if(pers.firstname2 === undefined){
+        tbody_td_firstname.colSpan = 2
+    }
+    else{
+        const tbody_td_firstname = document.createElement('td');
+        tbody_tr.appendChild(tbody_td_firstname);
+    
+        tbody_td_firstname.innerHTML = pers.firstname2;
+    }
+
     const tbody_td_married = document.createElement('td');
     tbody_tr.appendChild(tbody_td_married);
     tbody_td_married.innerHTML = pers.married;
@@ -81,23 +96,13 @@ for(const pers of array){
     tbody_tr.appendChild(tbody_td_pet);
     tbody_td_pet.innerHTML = pers.pet;
 
-    if(pers.firstname2 === undefined){
-        tbody_td_firstname.colSpan = 2
-    }
-    else{
-        const tbody_td_firstname = document.createElement('td');
-    tbody_tr.appendChild(tbody_td_firstname);
-    
-    tbody_td_firstname.innerHTML = pers.firstname2;
-    }
-
     tbody_tr.addEventListener('click',function(e){
         
         const selected = tbody.querySelector('.selected');
         if(selected != undefined){
             selected.classList.remove('selected');
         }
-    e.currentTarget.classList.add('selected');
+        e.currentTarget.classList.add('selected');
 
     })
 
