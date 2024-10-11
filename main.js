@@ -81,16 +81,22 @@ form.addEventListener('submit', function(e){
         firstname2Value = undefined;
     }
 
-    const newPerson = {
-        lastname : lastnameValue,
-        firstname1 : firstname1Value,
-        firstname2 : firstname2Value,
-        married : marriedValue,
-        pet : petValue
+    
+
+    if(validatefields(lastname, firstname1, pet)){
+        const newPerson = {
+            lastname : lastnameValue,
+            firstname1 : firstname1Value,
+            firstname2 : firstname2Value,
+            married : marriedValue,
+            pet : petValue
+        }
+
+        array.push(newPerson)
+        rendeltable()
     }
 
-    array.push(newPerson)
-    rendeltable()
+    
 })
 
 rendeltable()
@@ -148,4 +154,29 @@ function rendeltable() {
             tbody_td_married.innerHTML = 'nem'
         }
     }
+}
+
+function validatefields(lastname, firstname1, pet){
+    let result = true
+    if (lastname.value === '') {
+        const apa = lastname.parentElement 
+        const error = apa.querySelector('.error')
+        error.innerHTML = 'kötelező'
+        result = false
+    }
+
+    if (firstname1.value === '') {
+        const apa = firstname1.parentElement 
+        const error = apa.querySelector('.error')
+        error.innerHTML = 'kötelező'
+        result = false
+    }
+
+    if (pet.value === '') {
+        const apa = pet.parentElement 
+        const error = apa.querySelector('.error')
+        error.innerHTML = 'kötelező'
+        result = false
+    }
+    return result
 }
