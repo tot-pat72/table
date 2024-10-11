@@ -51,8 +51,6 @@ tr.appendChild(th_firstname2);
 
 th_firstname2.innerHTML = '2.keresztnev';
 
-th_lastname.colSpan=2;
-
 const th_married = document.createElement('th')
 tr.appendChild(th_married)
 th_married.innerHTML = 'házastárs';
@@ -64,58 +62,9 @@ th_pet.innerHTML = 'háziállat';
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
 
-for(const pers of array){
-    const tbody_tr = document.createElement('tr');
-    tbody.appendChild(tbody_tr);
-
-    const tbody_td_lastname = document.createElement('td');
-    tbody_tr.appendChild(tbody_td_lastname);
-    
-    tbody_td_lastname.innerHTML = pers.lastname;
-
-    const tbody_td_firstname = document.createElement('td');
-    tbody_tr.appendChild(tbody_td_firstname);
-    
-    tbody_td_firstname.innerHTML = pers.firstname1;
-
-    if(pers.firstname2 === undefined){
-        tbody_td_firstname.colSpan = 2
-    }
-    else{
-        const tbody_td_firstname = document.createElement('td');
-        tbody_tr.appendChild(tbody_td_firstname);
-    
-        tbody_td_firstname.innerHTML = pers.firstname2;
-    }
-
-    const tbody_td_married = document.createElement('td');
-    tbody_tr.appendChild(tbody_td_married);
-    tbody_td_married.innerHTML = pers.married;
-
-    const tbody_td_pet = document.createElement('td');
-    tbody_tr.appendChild(tbody_td_pet);
-    tbody_td_pet.innerHTML = pers.pet;
-
-    tbody_tr.addEventListener('click',function(e){
-        
-        const selected = tbody.querySelector('.selected');
-        if(selected != undefined){
-            selected.classList.remove('selected');
-        }
-        e.currentTarget.classList.add('selected');
-
-    })
-
-    if(pers.married === true){
-        tbody_td_married.innerHTML = 'igen'
-    }
-    else{
-        tbody_td_married.innerHTML = 'nem'
-    }
-}
-
 const form = document.getElementById('form');
 form.addEventListener('submit', function(e){
+    e.preventDefault()
     const lastname = document.getElementById('lastname');
     const firstname1 = document.getElementById('firstname1');
     const firstname2 = document.getElementById('firstname2');
@@ -124,7 +73,79 @@ form.addEventListener('submit', function(e){
 
     const lastnameValue = lastname.value;
     const firstname1Value = firstname1.value;
-    const firstname2Value = firstname2.value;
+    let firstname2Value = firstname2.value;
     const marriedValue = married.checked;
     const petValue = pet.value;
+
+    if(firstname2Value === ' '){
+        firstname2Value = undefined;
+    }
+
+    const newPerson = {
+        lastname : lastnameValue,
+        firstname1 : firstname1Value,
+        firstname2 : firstname2Value,
+        married : marriedValue,
+        pet : petValue
+    }
+
+    array.push(newPerson)
+    rendeltable()
 })
+
+rendeltable()
+
+function rendeltable() {
+    tbody.innerHTML = ' ';
+    for(const pers of array){
+        const tbody_tr = document.createElement('tr');
+        tbody.appendChild(tbody_tr);
+
+        
+    
+        const tbody_td_lastname = document.createElement('td');
+        tbody_tr.appendChild(tbody_td_lastname);
+        
+        tbody_td_lastname.innerHTML = pers.lastname;
+    
+        const tbody_td_firstname = document.createElement('td');
+        tbody_tr.appendChild(tbody_td_firstname);
+        
+        tbody_td_firstname.innerHTML = pers.firstname1;
+    
+        if(pers.firstname2 === undefined){
+            tbody_td_firstname.colSpan = 2
+        }
+        else{
+            const tbody_td_firstname = document.createElement('td');
+            tbody_tr.appendChild(tbody_td_firstname);
+        
+            tbody_td_firstname.innerHTML = pers.firstname2;
+        }
+    
+        const tbody_td_married = document.createElement('td');
+        tbody_tr.appendChild(tbody_td_married);
+        tbody_td_married.innerHTML = pers.married;
+    
+        const tbody_td_pet = document.createElement('td');
+        tbody_tr.appendChild(tbody_td_pet);
+        tbody_td_pet.innerHTML = pers.pet;
+    
+        tbody_tr.addEventListener('click',function(e){
+            
+            const selected = tbody.querySelector('.selected');
+            if(selected != undefined){
+                selected.classList.remove('selected');
+            }
+            e.currentTarget.classList.add('selected');
+    
+        })
+    
+        if(pers.married === true){
+            tbody_td_married.innerHTML = 'igen'
+        }
+        else{
+            tbody_td_married.innerHTML = 'nem'
+        }
+    }
+}
