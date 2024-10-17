@@ -96,7 +96,6 @@ form.addEventListener('submit', function(e){
         rendeltable()
     }
 
-    
 })
 
 rendeltable()
@@ -108,7 +107,6 @@ function rendeltable() {
         tbody.appendChild(tbody_tr);
 
         
-    
         const tbody_td_lastname = document.createElement('td');
         tbody_tr.appendChild(tbody_td_lastname);
         
