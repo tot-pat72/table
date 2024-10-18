@@ -36,28 +36,10 @@ table.appendChild(thead);
 const tr = document.createElement('tr');
 thead.appendChild(tr);
 
-const th_lastname = document.createElement('th');
-tr.appendChild(th_lastname);
-
-th_lastname.innerHTML = 'vezeteknev';
-
-const th_firstname1 = document.createElement('th');
-tr.appendChild(th_firstname1);
-
-th_firstname1.innerHTML = '1.keresztnev';
-
-const th_firstname2 = document.createElement('th');
-tr.appendChild(th_firstname2);
-
-th_firstname2.innerHTML = '2.keresztnev';
-
-const th_married = document.createElement('th')
-tr.appendChild(th_married)
-th_married.innerHTML = 'házastárs';
-
-const th_pet = document.createElement('th')
-tr.appendChild(th_pet)
-th_pet.innerHTML = 'háziállat';
+createTableCell('th', "vezeteknev", tr)
+createTableCell('th', "1.keresztnev", tr)
+createTableCell('th', "házastárs", tr)
+createTableCell('th', "háziállat", tr)
 
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
@@ -175,4 +157,16 @@ function validatefields(lastname, firstname1, pet){
         result = false
     }
     return result
+}
+
+/**
+ * 
+ * @param {'td'|'th'} tagName 
+ * @param {string} innerHTML 
+ * @param {HTMLTableRowElement} parentElement 
+ */
+function createTableCell(tagName, innerHTML ,parentElement){
+    const td = document.createElement(tagName)
+    td.innerHTML = innerHTML;
+    parentElement.appendChild(td)
 }
