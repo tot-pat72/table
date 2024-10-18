@@ -81,8 +81,6 @@ form.addEventListener('submit', function(e){
         firstname2Value = undefined;
     }
 
-    
-
     if(validatefields(lastname, firstname1, pet)){
         const newPerson = {
             lastname : lastnameValue,
