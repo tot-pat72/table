@@ -59,7 +59,7 @@ form.addEventListener('submit', function(e){
     const marriedValue = married.checked;
     const petValue = pet.value;
 
-    if(firstname2Value === ' '){
+    if(firstname2Value === ''){
         firstname2Value = undefined;
     }
 
@@ -81,39 +81,25 @@ form.addEventListener('submit', function(e){
 rendeltable()
 
 function rendeltable() {
-    tbody.innerHTML = ' ';
+    tbody.innerHTML = '';
     for(const pers of array){
         const tbody_tr = document.createElement('tr');
         tbody.appendChild(tbody_tr);
 
-        
-        const tbody_td_lastname = document.createElement('td');
-        tbody_tr.appendChild(tbody_td_lastname);
-        
-        tbody_td_lastname.innerHTML = pers.lastname;
-    
-        const tbody_td_firstname = document.createElement('td');
-        tbody_tr.appendChild(tbody_td_firstname);
-        
-        tbody_td_firstname.innerHTML = pers.firstname1;
+        createTableCell('td', pers.lastname, tbody_tr)
+
+        createTableCell('td', pers.firstname1, tbody_tr)
     
         if(pers.firstname2 === undefined){
             tbody_td_firstname.colSpan = 2
         }
         else{
-            const tbody_td_firstname = document.createElement('td');
-            tbody_tr.appendChild(tbody_td_firstname);
-        
-            tbody_td_firstname.innerHTML = pers.firstname2;
+            createTableCell('td', pers.firstname2, tbody_tr)
         }
     
-        const tbody_td_married = document.createElement('td');
-        tbody_tr.appendChild(tbody_td_married);
-        tbody_td_married.innerHTML = pers.married;
+        createTableCell('td', pers.married, tbody_tr)
     
-        const tbody_td_pet = document.createElement('td');
-        tbody_tr.appendChild(tbody_td_pet);
-        tbody_td_pet.innerHTML = pers.pet;
+        createTableCell('td', pers.pet, tbody_tr)
     
         tbody_tr.addEventListener('click',function(e){
             
