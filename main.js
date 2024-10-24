@@ -37,9 +37,11 @@ const tr = document.createElement('tr');
 thead.appendChild(tr);
 
 createTableCell('th', "vezeteknev", tr)
-createTableCell('th', "1.keresztnev", tr)
+const keresztnev = createTableCell('th', "1.keresztnev", tr)
 createTableCell('th', "házastárs", tr)
 createTableCell('th', "háziállat", tr)
+
+keresztnev.colSpan = 2;
 
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
@@ -88,16 +90,16 @@ function rendeltable() {
 
         createTableCell('td', pers.lastname, tbody_tr)
 
-        createTableCell('td', pers.firstname1, tbody_tr)
+        const tbody_td_firstname = createTableCell('td', pers.firstname1, tbody_tr)
     
         if(pers.firstname2 === undefined){
-            tbody_td_firstname.colSpan = 2
+            tbody_td_firstname.colSpan = 2;
         }
         else{
             createTableCell('td', pers.firstname2, tbody_tr)
         }
     
-        createTableCell('td', pers.married, tbody_tr)
+        createTableCell('td', pers.married ? "igen" : "Nem", tbody_tr)
     
         createTableCell('td', pers.pet, tbody_tr)
     
@@ -110,13 +112,6 @@ function rendeltable() {
             e.currentTarget.classList.add('selected');
     
         })
-    
-        if(pers.married === true){
-            tbody_td_married.innerHTML = 'igen'
-        }
-        else{
-            tbody_td_married.innerHTML = 'nem'
-        }
     }
 }
 
@@ -142,7 +137,7 @@ function validatefields(lastname, firstname1, pet){
         error.innerHTML = 'kötelező'
         result = false
     }
-    return result
+return result
 }
 
 /**
@@ -154,5 +149,6 @@ function validatefields(lastname, firstname1, pet){
 function createTableCell(tagName, innerHTML ,parentElement){
     const td = document.createElement(tagName)
     td.innerHTML = innerHTML;
-    parentElement.appendChild(td)
+    parentElement.appendChild(td);
+    return td;
 }
