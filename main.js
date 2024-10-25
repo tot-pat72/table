@@ -37,7 +37,7 @@ const tr = document.createElement('tr');
 thead.appendChild(tr);
 
 createTableCell('th', "vezeteknev", tr)
-const keresztnev = createTableCell('th', "1.keresztnev", tr)
+const keresztnev = createTableCell('th', "keresztnev", tr)
 createTableCell('th', "házastárs", tr)
 createTableCell('th', "háziállat", tr)
 
@@ -77,7 +77,7 @@ form.addEventListener('submit', function(e){
         array.push(newPerson)
         rendeltable()
     }
-
+    form.reset()
 })
 
 rendeltable()
