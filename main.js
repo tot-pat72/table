@@ -36,63 +36,26 @@ createTableHeaderCell();
 
 createHTMLElementWithParentElementId('tbody', 'person_tbody', 'person_table');
 
-const form = document.getElementById('form');
+
 form.addEventListener('submit', function(e){
     e.preventDefault()
-    const lastname = document.getElementById('lastname');
-    const firstname1 = document.getElementById('firstname1');
-    const firstname2 = document.getElementById('firstname2');
-    const married = document.getElementById('married');
-    const pet = document.getElementById('pet');
-
-    const lastnameValue = lastname.value;
-    const firstname1Value = firstname1.value;
-    let firstname2Value = firstname2.value;
-    const marriedValue = married.checked;
-    const petValue = pet.value;
-
-    if(firstname2Value === ''){
-        firstname2Value = undefined;
-    }
+    const form = e.currentTarget;
 
     if(validatefields(lastname, firstname1, pet)){
         const newPerson = {
-            lastname : lastnameValue,
-            firstname1 : firstname1Value,
-            firstname2 : firstname2Value,
-            married : marriedValue,
-            pet : petValue
+            lastname : document.getElementById('lastname').value,
+            firstname1 : document.getElementById('firstname1').value,
+            firstname2 : document.getElementById('firstname2').value,
+            married : document.getElementById('married').checked,
+            pet : document.getElementById('pet').value
         }
 
         array.push(newPerson)
         rendeltable(array)
+        
     }
     form.reset()
+    
 })
 
 rendeltable(array);
-
-function validatefields(lastname, firstname1, pet){
-    let result = true
-    if (lastname.value === '') {
-        const apa = lastname.parentElement 
-        const error = apa.querySelector('.error')
-        error.innerHTML = 'kötelező'
-        result = false
-    }
-
-    if (firstname1.value === '') {
-        const apa = firstname1.parentElement 
-        const error = apa.querySelector('.error')
-        error.innerHTML = 'kötelező'
-        result = false
-    }
-
-    if (pet.value === '') {
-        const apa = pet.parentElement 
-        const error = apa.querySelector('.error')
-        error.innerHTML = 'kötelező'
-        result = false
-    }
-return result
-}

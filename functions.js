@@ -44,7 +44,7 @@ function rendeltable(person_array) {
 
         const tbody_td_firstname = createTableCell('td', pers.firstname1, tbody_tr)
     
-        if(pers.firstname2 === undefined){
+        if(!pers.firstname2){
             tbody_td_firstname.colSpan = 2;
         }
         else{
@@ -65,4 +65,29 @@ function rendeltable(person_array) {
     
         })
     }
+}
+
+function validatefields(lastname, firstname1, pet){
+    let result = true;
+    if(!validateElements(lastname)){
+        result = false;
+    }
+    if(!validateElements(firstname1)){
+        result = false;
+    }
+    if(!validateElements(pet)){
+        result = false;
+    }
+    return result
+}
+
+function validateElements(fields){
+    const parent = fields.parentElement 
+    const error = parent.querySelector('.error')
+    if (fields.value === '') {
+        error.innerHTML = 'kötelező'
+        return false;
+    }
+    error.innerHTML = ''
+    return true;
 }
